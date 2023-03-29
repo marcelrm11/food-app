@@ -6,6 +6,26 @@ import { useEffect, useState } from "react";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const [recipes, setRecipes] = useState([]);
+
+  useEffect(() => {
+    console.log(process.env.API_KEY);
+    const fetchRecipes = async () => {
+      const response = await fetch(
+        "https://api.spoonacular.com/recipes/complexSearch",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key": `${process.env.API_KEY}`,
+          },
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      setRecipes(data.results);
+    };
+    fetchRecipes();
+  }, []);
   return (
     <>
       <Head>
@@ -19,6 +39,17 @@ export default function Home() {
       </Head>
       <main className={inter.className}>
         <h1>My Food App</h1>
+        <ul>
+          {recipes != undefined &&
+            recipes.map((recipe) => {
+              return (
+                <li key={recipe.id}>
+                  <h4>{recipe.title}</h4>
+                  <img src={recipe.image} alt={recipe.title} />
+                </li>
+              );
+            })}
+        </ul>
       </main>
     </>
   );
