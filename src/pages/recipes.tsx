@@ -36,7 +36,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <main className={inter.className}>
-        <h1>My Food App</h1>
+        <h1>My Food </h1>
         <ul>
           {recipes != undefined &&
             recipes.map((recipe) => {
