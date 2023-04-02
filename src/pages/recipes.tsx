@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { Inter } from 'next/font/google';
 // import styles from '@/styles/Home.module.css';
-// eslint-disable-next-line import/extensions
-import { ShortRecipe } from '../types';
+import type { Recipe } from '@/types';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
-  const [recipes, setRecipes] = useState<ShortRecipe[]>([]);
+  const [recipes, setRecipes] = useState<Recipe[]>([]);
 
   useEffect(() => {
     const fetchRecipes = async () => {

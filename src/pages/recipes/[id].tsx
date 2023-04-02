@@ -5,6 +5,7 @@ export default function Recipe() {
   const router = useRouter();
   const { id } = router.query;
   const [info, setInfo] = useState(null);
+
   useEffect(() => {
     const fetchInfo = async () => {
       const response = await fetch(
