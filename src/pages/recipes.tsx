@@ -28,7 +28,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Food App</title>
+        <title>My Food App</title>
         <meta
           name="description"
           content="Find recipes with the ingredients you have at home. Track what is about to expire and what you need to buy."
@@ -36,7 +36,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <main className={inter.className}>
-        <h1>My Food </h1>
+        <h1>My Food App</h1>
         <ul>
           {recipes != undefined &&
             recipes.map((recipe) => {
