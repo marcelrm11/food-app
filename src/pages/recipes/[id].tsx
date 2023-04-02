@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import type { ExtendedRecipe } from '@/types';
 
 export default function Recipe() {
   const router = useRouter();
   const { id } = router.query;
-  const [info, setInfo] = useState(null);
+  const [info, setInfo] = useState<ExtendedRecipe | null>(null);
 
   useEffect(() => {
     const fetchInfo = async () => {
