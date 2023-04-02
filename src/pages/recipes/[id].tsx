@@ -28,6 +28,7 @@ export default function Recipe() {
       <article>
         <h2>{info.title}</h2>
         <p dangerouslySetInnerHTML={{ __html: info.summary }} />
+        {/* see note about dangerously(...) in docs file */}
         <img
           src={info.image}
           alt={info.title}
