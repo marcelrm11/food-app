@@ -23,7 +23,16 @@
       1,
       { "extensions": [".js", ".jsx", ".tsx"] }
     ],
-    "import/no-unresolved": "error"
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ]
   },
   "settings": {
     "import/parsers": {
