@@ -1,0 +1,8 @@
+.infoTop {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+}
+.infoTop img {
+  object-fit: contain;
+}

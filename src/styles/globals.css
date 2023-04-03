@@ -1,6 +1,10 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   /* font-family: "Segoe Print", "Bradley Hand", Chilanka, TSCu_Comic, casual,
     cursive; */
-  font-family: Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans",
+  font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans',
     Arial, sans-serif;
 }

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import type { ExtendedRecipe } from '@/types';
-import HtmlRenderer from '@/components/HtmlRenderer';
 import Link from 'next/link';
+import styles from '@/styles/Recipe.module.css';
 
 export default function Recipe() {
   const router = useRouter();
@@ -40,25 +40,31 @@ export default function Recipe() {
       {info && (
         <>
           <h2>{info.title}</h2>
-          <HtmlRenderer content={info.summary} />
-          {/* see note about dangerously(...) in docs file */}
-          <img
-            src={info.image}
-            alt={info.title}
-            width="375px"
-          />
-          <h4>Ingredients:</h4>
-          <ul>
-            {info.extendedIngredients.map((ing) => (
-              <li key={`${ing.id}-${ing.original}`}>
-                <h6>{ing.name}</h6>
-              </li>
-            ))}
-          </ul>
+          <section className={styles.infoTop}>
+            <img
+              src={info.image}
+              alt={info.title}
+              width="375px"
+            />
+            <section>
+              <h4>Ingredients:</h4>
+              <ul>
+                {info.extendedIngredients.map((ing) => (
+                  <li key={`${ing.id}-${ing.original}`}>
+                    <h6>{ing.name}</h6>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          </section>
           <h4>Diets:</h4>
           <p>{info.diets.join(', ')}</p>
-          <h4>Pairings:</h4>
-          <p>{info.winePairing.pairingText}</p>
+          {info.winePairing.pairedWines.length > 0 && (
+            <>
+              <h4>Pairings:</h4>
+              <p>{info.winePairing.pairingText}</p>
+            </>
+          )}
         </>
       )}
     </article>

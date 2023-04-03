@@ -1,0 +1,36 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0.5rem;
+}
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  justify-content: center;
+}
+.search {
+  margin-bottom: 2rem;
+}
+.search label {
+  margin-right: 1rem;
+}
+.search input {
+  width: 15rem;
+}
+
+@media screen and (min-width: 768px) {
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
+  }
+}

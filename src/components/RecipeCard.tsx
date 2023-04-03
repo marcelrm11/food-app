@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
+import styles from '@/styles/RecipeCard.module.css';
 
 interface RecipeCardProps {
   id: number;
@@ -9,7 +10,7 @@ interface RecipeCardProps {
 
 export default function RecipeCard({ id, image, title }: RecipeCardProps) {
   return (
-    <section style={{ width: '400px', border: '1px solid grey' }}>
+    <section className={styles.card}>
       <Link href={`/recipes/${id}`}>
         <img
           src={image}
