@@ -7,7 +7,7 @@ export default function Document() {
       <Head>
         <link
           rel="icon"
-          href="/marcel.ico"
+          href="/marcel.png"
         />
       </Head>
       <body>

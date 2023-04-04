@@ -9,14 +9,20 @@
   gap: 1em;
   justify-content: center;
 }
-.search {
-  margin-bottom: 2rem;
+.search,
+.cuisines {
+  margin-bottom: 1rem;
 }
 .search label {
   margin-right: 1rem;
 }
 .search input {
   width: 15rem;
+}
+.cuisines {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+  gap: 0.5rem;
 }
 
 @media screen and (min-width: 768px) {

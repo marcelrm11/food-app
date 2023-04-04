@@ -7,19 +7,50 @@ import RecipeCard from '@/components/RecipeCard';
 
 const inter = Inter({ subsets: ['latin'] });
 
+const allCuisines = [
+  'african',
+  'american',
+  'british',
+  'cajun',
+  'caribbean',
+  'chinese',
+  'eastern european',
+  'european',
+  'french',
+  'german',
+  'greek',
+  'indian',
+  'irish',
+  'italian',
+  'japanese',
+  'jewish',
+  'korean',
+  'latin american',
+  'mediterranean',
+  'mexican',
+  'middle eastern',
+  'nordic',
+  'southern',
+  'spanish',
+  'thai',
+  'vietnamese',
+];
+
 export default function Home() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [search, setSearch] = useState<string>('');
   const [debouncedSearch, setDebouncedSearch] = useState<string>('');
+  const [cuisines, setCuisines] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchRecipes = async () => {
       const response = await fetch(
-        `https://api.spoonacular.com/recipes/complexSearch?query=${debouncedSearch}`,
+        `${
+          process.env.NEXT_PUBLIC_API_URL
+        }&query=${debouncedSearch}&cuisine=${cuisines.join(',')}`,
         {
           headers: {
             'Content-Type': 'application/json',
-            'x-api-key': `${process.env.API_KEY}`,
           },
         }
       );
@@ -28,7 +59,7 @@ export default function Home() {
       setRecipes(data.results);
     };
     fetchRecipes();
-  }, [debouncedSearch]);
+  }, [cuisines, debouncedSearch]);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -38,6 +69,17 @@ export default function Home() {
       clearTimeout(timeoutId);
     };
   }, [search]);
+
+  const handleCuisineChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = e.target;
+    if (checked) {
+      setCuisines((prevCuisines) => [...prevCuisines, name]);
+    } else {
+      setCuisines((prevCuisines) =>
+        prevCuisines.filter((cuisine) => cuisine !== name)
+      );
+    }
+  };
 
   return (
     <>
@@ -52,8 +94,10 @@ export default function Home() {
           content="width=device-width, initial-scale=1"
         />
       </Head>
+
       <main className={`${inter.className} ${styles.layout}`}>
         <h1>My Food App</h1>
+
         <section className={styles.search}>
           <label htmlFor="search">What do you want to eat?</label>
           <input
@@ -63,8 +107,28 @@ export default function Home() {
             onChange={(e) => setSearch(e.target.value)}
           />
         </section>
+
+        <section>
+          <fieldset className={styles.cuisines}>
+            <legend>Cuisine:</legend>
+            {allCuisines.map((cuisine) => (
+              <div key={cuisine}>
+                <input
+                  type="checkbox"
+                  name={cuisine}
+                  id={cuisine}
+                  value={cuisine}
+                  onChange={handleCuisineChange}
+                  checked={cuisines.includes(cuisine)}
+                />
+                <label htmlFor={cuisine}>{cuisine}</label>
+              </div>
+            ))}
+          </fieldset>
+        </section>
+
         <article className={styles.grid}>
-          {recipes.length > 0 ? (
+          {recipes !== undefined && recipes.length > 0 ? (
             recipes.map((recipe) => (
               <RecipeCard
                 key={recipe.id}
