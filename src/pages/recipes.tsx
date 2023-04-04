@@ -61,6 +61,7 @@ export default function Home() {
     fetchRecipes();
   }, [cuisines, debouncedSearch]);
 
+  // see useDebounce in docs.md
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setDebouncedSearch(search);
