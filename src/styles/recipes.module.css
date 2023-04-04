@@ -4,10 +4,9 @@
   padding: 0 0.5rem;
 }
 .grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1em;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
 }
 .search,
 .cuisines {
@@ -24,8 +23,14 @@
   grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
   gap: 0.5rem;
 }
+.cuisines label {
+  margin-left: 0.25rem;
+}
 
 @media screen and (min-width: 768px) {
+  .layout {
+    padding: 0 2rem;
+  }
   .grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
