@@ -12,11 +12,10 @@ export default function Recipe() {
   useEffect(() => {
     const fetchInfo = async () => {
       const response = await fetch(
-        `https://api.spoonacular.com/recipes/${id}/information`,
+        `${process.env.NEXT_PUBLIC_API_URL}/recipes/${id}/information?apiKey=${process.env.NEXT_PUBLIC_API_KEY}`,
         {
           headers: {
             'Content-Type': 'application/json',
-            'x-api-key': `${process.env.API_KEY}`,
           },
         }
       );
@@ -37,34 +36,57 @@ export default function Recipe() {
           Back
         </button>
       </Link>
+
       {info && (
         <>
           <h2>{info.title}</h2>
-          <section className={styles.infoTop}>
+          <section className={styles.info}>
             <img
               src={info.image}
               alt={info.title}
               width="375px"
             />
-            <section>
+
+            <section className={styles.ingredients}>
               <h4>Ingredients:</h4>
               <ul>
-                {info.extendedIngredients.map((ing) => (
+                {info.extendedIngredients?.map((ing) => (
                   <li key={`${ing.id}-${ing.original}`}>
-                    <h6>{ing.name}</h6>
+                    <img
+                      src={`https://spoonacular.com/cdn/ingredients_250x250/${ing.image}`}
+                      alt={ing.original}
+                    />
+                    <strong>{ing.original}</strong>
                   </li>
                 ))}
               </ul>
             </section>
+
+            <section>
+              <h4>Diets:</h4>
+              <p>{info.diets?.join(', ')}</p>
+            </section>
+
+            <section>
+              <h4>Instructions:</h4>
+              <ol type="1">
+                {info.analyzedInstructions?.[0].steps.map((step) => (
+                  <li key={step.number}>
+                    <p>{step.step}</p>
+                  </li>
+                ))}
+              </ol>
+            </section>
+
+            <section>
+              {info.winePairing?.pairedWines.length > 0 && (
+                <>
+                  <h4>Pairings:</h4>
+                  <p>{info.winePairing?.pairingText}</p>
+                </>
+              )}
+            </section>
           </section>
-          <h4>Diets:</h4>
-          <p>{info.diets.join(', ')}</p>
-          {info.winePairing.pairedWines.length > 0 && (
-            <>
-              <h4>Pairings:</h4>
-              <p>{info.winePairing.pairingText}</p>
-            </>
-          )}
         </>
       )}
     </article>

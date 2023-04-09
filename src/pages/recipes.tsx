@@ -45,9 +45,9 @@ export default function Home() {
   useEffect(() => {
     const fetchRecipes = async () => {
       const response = await fetch(
-        `${
-          process.env.NEXT_PUBLIC_API_URL
-        }&query=${debouncedSearch}&cuisine=${cuisines.join(',')}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/recipes/complexSearch?apiKey=${
+          process.env.NEXT_PUBLIC_API_KEY
+        }&query=${debouncedSearch}&cuisine=${cuisines.join(',')}&number=40`,
         {
           headers: {
             'Content-Type': 'application/json',
