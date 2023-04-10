@@ -48,6 +48,8 @@ export default function Recipe() {
             />
 
             <section className={styles.ingredients}>
+              {/* todo: servings useState modify qties */}
+              <h3>{`Servings: ${info.servings}`}</h3>
               <h4>Ingredients:</h4>
               <ul>
                 {info.extendedIngredients?.map((ing) => (
@@ -56,7 +58,8 @@ export default function Recipe() {
                       src={`https://spoonacular.com/cdn/ingredients_250x250/${ing.image}`}
                       alt={ing.original}
                     />
-                    <strong>{ing.original}</strong>
+                    <strong>{ing.nameClean}</strong>
+                    <small>{`${ing.amount} ${ing.unit}`}</small>
                   </li>
                 ))}
               </ul>
