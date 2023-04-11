@@ -55,8 +55,8 @@ const diets: { [key: string]: Diet } = {
     name: 'pescetarian',
     icon: FishIcon.src,
   },
-  paleo: {
-    name: 'paleo',
+  paleolithic: {
+    name: 'paleolithic',
     icon: PaleoIcon.src,
   },
   primal: {
@@ -115,7 +115,7 @@ export default function Recipe() {
   }, [id]);
 
   return (
-    <article>
+    <article className={styles.article}>
       {!info && (
         <Link href="/recipes">
           <button
@@ -198,7 +198,7 @@ export default function Recipe() {
                       src={`https://spoonacular.com/cdn/ingredients_250x250/${ing.image}`}
                       alt={ing.original}
                     />
-                    <strong>{ing.nameClean}</strong>
+                    <span>{ing.nameClean.toUpperCase()}</span>
                     <small>{`${ing.amount} ${ing.unit}`}</small>
                   </li>
                 ))}
@@ -217,10 +217,12 @@ export default function Recipe() {
                   </li>
                 ))}
               </ol>
-              <img
-                src={info.image}
-                alt={info.title}
-              />
+              <div>
+                <img
+                  src={info.image}
+                  alt={info.title}
+                />
+              </div>
             </section>
 
             <section>
