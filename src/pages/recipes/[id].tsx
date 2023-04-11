@@ -112,26 +112,36 @@ export default function Recipe() {
 
   return (
     <article>
-      <Link href="/recipes">
-        <button
-          type="button"
-          style={{ width: '200px', height: '50px' }}
-        >
-          Back
-        </button>
-      </Link>
+      {!info && (
+        <Link href="/recipes">
+          <button
+            type="button"
+            className={styles.backButton}
+          >
+            Back
+          </button>
+        </Link>
+      )}
 
       {info && (
         <>
-          <h2>{info.title}</h2>
-          <section className={styles.info}>
-            <section className={styles.header}>
-              <img
-                src={info.image}
-                alt={info.title}
-              />
-            </section>
+          <section className={styles.header}>
+            <Link href="/recipes">
+              <button
+                type="button"
+                className={styles.backButton}
+              >
+                Back
+              </button>
+            </Link>
+            <h2>{info.title}</h2>
+            <img
+              src={info.image}
+              alt={info.title}
+            />
+          </section>
 
+          <section className={styles.info}>
             <section className={styles.diets}>
               <ul>
                 {info.diets?.map((diet) => (
