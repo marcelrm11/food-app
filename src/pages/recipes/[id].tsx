@@ -13,6 +13,9 @@ import VeganIcon from '../../assets/icons/vegan.png';
 import FishIcon from '../../assets/icons/fish.png';
 import PaleoIcon from '../../assets/icons/paleo.png';
 import OliveOilIcon from '../../assets/icons/olive-oil.png';
+import ServingsIcon from '../../assets/icons/servings.png';
+import ClockIcon from '../../assets/icons/clock.png';
+import LikeIcon from '../../assets/icons/heart.png';
 
 interface Diet {
   name: string;
@@ -84,6 +87,7 @@ const dietIcon = (diet: string) => {
       src={diets[dietName].icon}
       alt={diets[dietName].name}
       title={diets[dietName].name}
+      className={styles.icon}
     />
   );
 };
@@ -142,23 +146,54 @@ export default function Recipe() {
           </section>
 
           <section className={styles.info}>
-            <section className={styles.diets}>
-              <ul>
-                {info.diets?.map((diet) => (
-                  <li key={diet}>{dietIcon(diet)}</li>
-                ))}
-              </ul>
+            <section className={styles.facts}>
+              <section className={styles.diets}>
+                <ul>
+                  {info.diets?.map((diet) => (
+                    <li key={diet}>{dietIcon(diet)}</li>
+                  ))}
+                </ul>
+              </section>
+
+              {/* todo: servings useState modify qties */}
+              <section className={styles.servings}>
+                <img
+                  src={ServingsIcon.src}
+                  alt={`Servings: ${info.servings}`}
+                  title="servings"
+                  className={styles.icon}
+                />
+                <strong>{info.servings}</strong>
+              </section>
+
+              <section className={styles.time}>
+                <img
+                  src={ClockIcon.src}
+                  alt={`Time: ${info.readyInMinutes} minutes`}
+                  title="time"
+                  className={styles.icon}
+                />
+                <strong>{info.readyInMinutes} minutes</strong>
+              </section>
+
+              <section className={styles.likes}>
+                <img
+                  src={LikeIcon.src}
+                  alt={`Time: ${info.aggregateLikes} likes`}
+                  title="likes"
+                  className={styles.icon}
+                />
+                <strong>{info.aggregateLikes}</strong>
+              </section>
             </section>
 
+            <hr />
+
             <section className={styles.ingredients}>
-              {/* todo: servings useState modify qties */}
-              <h3>{`Servings: ${info.servings}`}</h3>
+              <h3>Ingredients</h3>
               <ul>
                 {info.extendedIngredients?.map((ing) => (
-                  <li
-                    key={`${ing.id}-${ing.original}`}
-                    className="neomorphism--inset"
-                  >
+                  <li key={`${ing.id}-${ing.original}`}>
                     <img
                       src={`https://spoonacular.com/cdn/ingredients_250x250/${ing.image}`}
                       alt={ing.original}
@@ -171,7 +206,7 @@ export default function Recipe() {
             </section>
 
             <section className={styles.instructions}>
-              <h4>Instructions:</h4>
+              <h3>Instructions</h3>
               <ol type="1">
                 {info.analyzedInstructions?.[0].steps.map((step) => (
                   <li key={step.number}>
@@ -191,7 +226,7 @@ export default function Recipe() {
             <section>
               {info.winePairing?.pairedWines.length > 0 && (
                 <>
-                  <h4>Pairings:</h4>
+                  <h3>Pairings</h3>
                   <p>{info.winePairing?.pairingText}</p>
                 </>
               )}
