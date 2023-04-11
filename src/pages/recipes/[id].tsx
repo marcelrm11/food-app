@@ -225,7 +225,7 @@ export default function Recipe() {
               </div>
             </section>
 
-            <section>
+            <section className={styles.pairings}>
               {info.winePairing?.pairedWines.length > 0 && (
                 <>
                   <h3>Pairings</h3>
