@@ -147,13 +147,15 @@ export default function Recipe() {
 
           <section className={styles.info}>
             <section className={styles.facts}>
-              <section className={styles.diets}>
-                <ul>
-                  {info.diets?.map((diet) => (
-                    <li key={diet}>{dietIcon(diet)}</li>
-                  ))}
-                </ul>
-              </section>
+              {info.diets.length > 0 && (
+                <section className={styles.diets}>
+                  <ul>
+                    {info.diets?.map((diet) => (
+                      <li key={diet}>{dietIcon(diet)}</li>
+                    ))}
+                  </ul>
+                </section>
+              )}
 
               {/* todo: servings useState modify qties */}
               <section className={styles.servings}>
@@ -206,17 +208,21 @@ export default function Recipe() {
             </section>
 
             <section className={styles.instructions}>
-              <h3>Instructions</h3>
-              <ol type="1">
-                {info.analyzedInstructions?.[0].steps.map((step) => (
-                  <li key={step.number}>
-                    <p>{step.step}</p>
-                    {/* <img
+              {info.analyzedInstructions.length > 0 && (
+                <>
+                  <h3>Instructions</h3>
+                  <ol type="1">
+                    {info.analyzedInstructions[0].steps.map((step) => (
+                      <li key={step.number}>
+                        <p>{step.step}</p>
+                        {/* <img
                       src={`https://spoonacular.com/cdn/equipment_250x250/${step.equipment[0]?.image}`}
                     /> */}
-                  </li>
-                ))}
-              </ol>
+                      </li>
+                    ))}
+                  </ol>
+                </>
+              )}
               <div>
                 <img
                   src={info.image}
@@ -226,7 +232,7 @@ export default function Recipe() {
             </section>
 
             <section className={styles.pairings}>
-              {info.winePairing?.pairedWines.length > 0 && (
+              {info.winePairing?.pairedWines?.length > 0 && (
                 <>
                   <h3>Pairings</h3>
                   <p>{info.winePairing?.pairingText}</p>

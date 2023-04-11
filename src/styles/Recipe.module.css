@@ -5,6 +5,8 @@
   padding: 0.8rem 2rem;
   /* width: 100px;
   height: 50px; */
+  box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.2),
+    -4px -4px 10px 0 rgba(255, 255, 255, 0.5);
 }
 
 .icon {
@@ -80,13 +82,14 @@
 .likes {
   box-shadow: inset 6px 6px 10px 0 rgba(0, 0, 0, 0.2),
     inset -6px -6px 10px 0 rgba(255, 255, 255, 0.5);
-  padding: 0.25rem 1.5rem;
+  padding: 1.25rem 1.5rem;
   border-radius: 20px;
   display: flex;
   align-items: center;
 }
 .diets ul {
   padding: 0;
+  margin: 0;
 }
 .diets li {
   list-style: none;
