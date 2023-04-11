@@ -1,3 +1,6 @@
+/* .article {
+  padding: 0 4rem;
+} */
 .backButton {
   padding: 0.8rem 2rem;
   /* width: 100px;
@@ -16,16 +19,13 @@
 }
 .header h2 {
   position: absolute;
-  bottom: 4px;
+  width: 100%;
+  bottom: 0px;
   left: 0;
   margin: 0;
   padding: 1rem 1rem;
-  background: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0.7),
-    80%,
-    rgba(255, 255, 255, 0)
-  );
+  padding-top: 3rem;
+  background: linear-gradient(to top, rgba(224, 224, 224, 1), 70%, transparent);
 }
 .header img {
   object-fit: cover;
@@ -55,6 +55,17 @@
 }
 .info h3 {
   text-align: center;
+}
+@media screen and (min-width: 800px) {
+  .info {
+    padding: 2rem 15rem;
+  }
+  .header h2 {
+    padding-left: 15rem;
+  }
+  .header .backButton {
+    left: 15rem;
+  }
 }
 
 .facts {
@@ -120,6 +131,7 @@
 }
 
 .instructions {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -127,9 +139,34 @@
 .instructions h3 {
   margin-bottom: 0;
 }
+.instructions ol {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding: 0;
+}
+.instructions li {
+  list-style-type: none;
+  width: 50vw;
+  border-radius: 20px;
+  padding: 1rem 2rem;
+  margin-bottom: 2rem;
+  background: #e0e0e0;
+  box-shadow: inset 6px 6px 10px 0 rgba(0, 0, 0, 0.2),
+    inset -6px -6px 10px 0 rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.5px;
+  line-height: 1.5rem;
+}
+.instructions li:nth-child(1 + 2n) {
+  align-self: flex-start;
+}
+.instructions li:nth-child(2n) {
+  align-self: flex-end;
+}
 .instructions img {
   max-width: 636px; /* max value from API */
-  padding: 4rem;
+  padding: 3rem;
   border-radius: 20px;
   box-shadow: inset 6px 6px 10px 0 rgba(0, 0, 0, 0.2),
     inset -6px -6px 10px 0 rgba(255, 255, 255, 0.5);
