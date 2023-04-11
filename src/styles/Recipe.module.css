@@ -5,7 +5,11 @@
   gap: 2rem;
   background-color: #e0e0e0;
 }
-.info img {
+
+.header {
+  width: 100%;
+}
+.header img {
   object-fit: cover;
   width: 100%;
   max-height: 30vh;
@@ -44,6 +48,16 @@
 }
 .ingredients li strong {
   align-self: end;
+}
+
+.diets li {
+  list-style: none;
+  display: inline-block;
+  padding: 0 0.5rem;
+}
+.diets img {
+  max-width: 50px;
+  aspect-ratio: 1 / 1;
 }
 
 .instructions img {

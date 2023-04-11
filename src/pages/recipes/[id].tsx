@@ -3,6 +3,90 @@ import { useRouter } from 'next/router';
 import type { ExtendedRecipe } from '@/types';
 import Link from 'next/link';
 import styles from '@/styles/Recipe.module.css';
+import GlutenFreeIcon from '../../assets/icons/gluten-free.png';
+import NoMilkIcon from '../../assets/icons/no-milk.png';
+import KetoIcon from '../../assets/icons/keto.png';
+import NoEggsIcon from '../../assets/icons/no-eggs.png';
+import BreadIcon from '../../assets/icons/bread.png';
+import LeafIcon from '../../assets/icons/leaf.png';
+import VeganIcon from '../../assets/icons/vegan.png';
+import FishIcon from '../../assets/icons/fish.png';
+import PaleoIcon from '../../assets/icons/paleo.png';
+import OliveOilIcon from '../../assets/icons/olive-oil.png';
+
+interface Diet {
+  name: string;
+  icon: string;
+}
+
+const diets: { [key: string]: Diet } = {
+  glutenFree: {
+    name: 'gluten free',
+    icon: GlutenFreeIcon.src,
+  },
+  dairyFree: {
+    name: 'dairy free',
+    icon: NoMilkIcon.src,
+  },
+  ketogenic: {
+    name: 'ketogenic',
+    icon: KetoIcon.src,
+  },
+  lactoOvoVegetarian: {
+    name: 'lacto ovo vegetarian',
+    icon: LeafIcon.src,
+  },
+  lactoVegetarian: {
+    name: 'lacto vegetarian',
+    icon: NoEggsIcon.src,
+  },
+  ovoVegetarian: {
+    name: 'ovo vegetarian',
+    icon: NoMilkIcon.src,
+  },
+  vegan: {
+    name: 'vegan',
+    icon: VeganIcon.src,
+  },
+  pescetarian: {
+    name: 'pescetarian',
+    icon: FishIcon.src,
+  },
+  paleo: {
+    name: 'paleo',
+    icon: PaleoIcon.src,
+  },
+  primal: {
+    name: 'primal',
+    icon: PaleoIcon.src,
+  },
+  lowFodMap: {
+    name: 'low fodmap',
+    icon: OliveOilIcon.src,
+  },
+  whole30: {
+    name: 'whole30',
+    icon: BreadIcon.src,
+  },
+};
+
+// function generated with AI
+function toCamelCase(text: string): string {
+  return text.replace(/\s(.)/g, function (match, group1) {
+    return group1.toUpperCase();
+  });
+}
+
+const dietIcon = (diet: string) => {
+  const dietName = toCamelCase(diet);
+  return (
+    <img
+      src={diets[dietName].icon}
+      alt={diets[dietName].name}
+      title={diets[dietName].name}
+    />
+  );
+};
 
 export default function Recipe() {
   const router = useRouter();
@@ -41,17 +125,30 @@ export default function Recipe() {
         <>
           <h2>{info.title}</h2>
           <section className={styles.info}>
-            <img
-              src={info.image}
-              alt={info.title}
-            />
+            <section className={styles.header}>
+              <img
+                src={info.image}
+                alt={info.title}
+              />
+            </section>
+
+            <section className={styles.diets}>
+              <ul>
+                {info.diets?.map((diet) => (
+                  <li key={diet}>{dietIcon(diet)}</li>
+                ))}
+              </ul>
+            </section>
 
             <section className={styles.ingredients}>
               {/* todo: servings useState modify qties */}
               <h3>{`Servings: ${info.servings}`}</h3>
               <ul>
                 {info.extendedIngredients?.map((ing) => (
-                  <li key={`${ing.id}-${ing.original}`}>
+                  <li
+                    key={`${ing.id}-${ing.original}`}
+                    className="neomorphism--inset"
+                  >
                     <img
                       src={`https://spoonacular.com/cdn/ingredients_250x250/${ing.image}`}
                       alt={ing.original}
@@ -61,11 +158,6 @@ export default function Recipe() {
                   </li>
                 ))}
               </ul>
-            </section>
-
-            <section>
-              <h4>Diets:</h4>
-              <p>{info.diets?.join(', ')}</p>
             </section>
 
             <section className={styles.instructions}>
