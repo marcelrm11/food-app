@@ -44,13 +44,11 @@ export default function Recipe() {
             <img
               src={info.image}
               alt={info.title}
-              width="375px"
             />
 
             <section className={styles.ingredients}>
               {/* todo: servings useState modify qties */}
               <h3>{`Servings: ${info.servings}`}</h3>
-              <h4>Ingredients:</h4>
               <ul>
                 {info.extendedIngredients?.map((ing) => (
                   <li key={`${ing.id}-${ing.original}`}>
@@ -70,15 +68,22 @@ export default function Recipe() {
               <p>{info.diets?.join(', ')}</p>
             </section>
 
-            <section>
+            <section className={styles.instructions}>
               <h4>Instructions:</h4>
               <ol type="1">
                 {info.analyzedInstructions?.[0].steps.map((step) => (
                   <li key={step.number}>
                     <p>{step.step}</p>
+                    {/* <img
+                      src={`https://spoonacular.com/cdn/equipment_250x250/${step.equipment[0]?.image}`}
+                    /> */}
                   </li>
                 ))}
               </ol>
+              <img
+                src={info.image}
+                alt={info.title}
+              />
             </section>
 
             <section>

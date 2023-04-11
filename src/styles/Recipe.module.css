@@ -6,7 +6,9 @@
   background-color: #e0e0e0;
 }
 .info img {
-  object-fit: contain;
+  object-fit: cover;
+  width: 100%;
+  max-height: 30vh;
 }
 
 /* .ingredients {
@@ -14,7 +16,8 @@
 .ingredients ul {
   padding: 0;
   display: flex;
-  gap: 3rem;
+  justify-content: center;
+  gap: 1.5rem;
   flex-wrap: wrap;
 }
 .ingredients li {
@@ -23,7 +26,7 @@
   grid-template-rows: 1fr auto;
   gap: 0.5rem;
   max-width: 150px;
-  min-height: 210px;
+  height: 250px;
   padding: 2rem;
   padding-bottom: 1.5rem;
   border-radius: 50px;
@@ -31,7 +34,8 @@
   font-size: small;
   text-align: center;
   background: #e0e0e0;
-  box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+  box-shadow: inset 6px 6px 10px 0 rgba(0, 0, 0, 0.2),
+    inset -6px -6px 10px 0 rgba(255, 255, 255, 0.5);
 }
 .ingredients li img {
   max-width: 100%;
@@ -40,4 +44,8 @@
 }
 .ingredients li strong {
   align-self: end;
+}
+
+.instructions img {
+  width: initial;
 }
