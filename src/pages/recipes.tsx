@@ -1,75 +1,67 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import Head from 'next/head';
 import { Inter } from 'next/font/google';
 import styles from '@/styles/recipes.module.css';
 import type { Recipe } from '@/types';
 import RecipeCard from '@/components/RecipeCard';
+import useLocalStorage from '@/hooks/useLocalStorage';
+import useDebounce from '@/hooks/useDebounce';
+import { allCuisines } from '@/utils/cuisines';
 
 const inter = Inter({ subsets: ['latin'] });
 
-const allCuisines = [
-  'african',
-  'american',
-  'british',
-  'cajun',
-  'caribbean',
-  'chinese',
-  'eastern european',
-  'european',
-  'french',
-  'german',
-  'greek',
-  'indian',
-  'irish',
-  'italian',
-  'japanese',
-  'jewish',
-  'korean',
-  'latin american',
-  'mediterranean',
-  'mexican',
-  'middle eastern',
-  'nordic',
-  'southern',
-  'spanish',
-  'thai',
-  'vietnamese',
-];
+async function getServerSideProps() {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/recipes/complexSearch?apiKey=${process.env.NEXT_PUBLIC_API_KEY}&number=50&sort=popularity&sortDirection=desc`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  );
+  const data = await response.json();
+  return { props: { initialRecipes: data.results } };
+}
 
-export default function Home() {
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const [search, setSearch] = useState<string>('');
-  const [debouncedSearch, setDebouncedSearch] = useState<string>('');
-  const [cuisines, setCuisines] = useState<string[]>([]);
+export default function Home({ initialRecipes }: { initialRecipes: Recipe[] }) {
+  const [recipes, setRecipes] = useState<Recipe[]>(initialRecipes);
+  const [search, setSearch] = useLocalStorage<string>('search', '');
+  const [cuisines, setCuisines] = useLocalStorage<string[]>('cuisines', []);
+  const debouncedSearch = useDebounce(search, 500);
+
+  // const setRecipesCallback = useCallback(
+  //   (recipes: Recipe[]) => {
+  //     setRecipes(recipes);
+  //   },
+  //   [setRecipes]
+  // );
 
   useEffect(() => {
     const fetchRecipes = async () => {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/recipes/complexSearch?apiKey=${
-          process.env.NEXT_PUBLIC_API_KEY
-        }&query=${debouncedSearch}&cuisine=${cuisines.join(',')}&number=40`,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-      const data = await response.json();
-      console.log(data);
-      setRecipes(data.results);
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/recipes/complexSearch?apiKey=${
+            process.env.NEXT_PUBLIC_API_KEY_2
+          }&query=${debouncedSearch}&cuisine=${cuisines.join(
+            ','
+          )}&number=50&sort=popularity&sortDirection=desc`,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+        const data = await response.json();
+        console.log(data);
+        setRecipes(data.results);
+      } catch (error) {
+        console.log(error);
+      }
     };
     fetchRecipes();
   }, [cuisines, debouncedSearch]);
 
-  // see useDebounce in docs.md
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setDebouncedSearch(search);
-    }, 500);
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [search]);
+  const memoizedRecipes = useMemo(() => recipes, [recipes]);
 
   const handleCuisineChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
@@ -109,8 +101,8 @@ export default function Home() {
           />
         </section>
 
-        <section>
-          <fieldset className={styles.cuisines}>
+        <section className={styles.cuisines}>
+          <fieldset>
             <legend>Cuisine:</legend>
             {allCuisines.map((cuisine) => (
               <div key={cuisine}>
@@ -129,8 +121,8 @@ export default function Home() {
         </section>
 
         <article className={styles.grid}>
-          {recipes !== undefined && recipes.length > 0 ? (
-            recipes.map((recipe) => (
+          {memoizedRecipes?.length > 0 ? (
+            memoizedRecipes.map((recipe) => (
               <RecipeCard
                 key={recipe.id}
                 id={recipe.id}
