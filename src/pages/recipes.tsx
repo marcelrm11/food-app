@@ -1,14 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Head from 'next/head';
-import { Inter } from 'next/font/google';
 import styles from '@/styles/recipes.module.css';
 import type { Recipe } from '@/types';
 import RecipeCard from '@/components/RecipeCard';
 import useLocalStorage from '@/hooks/useLocalStorage';
 import useDebounce from '@/hooks/useDebounce';
 import { allCuisines } from '@/utils/cuisines';
-
-const inter = Inter({ subsets: ['latin'] });
+import { cantarell, nunito } from '@/utils/fonts';
 
 async function getServerSideProps() {
   const response = await fetch(
@@ -81,8 +79,8 @@ export default function Home({ initialRecipes }: { initialRecipes: Recipe[] }) {
         />
       </Head>
 
-      <main className={`${inter.className} ${styles.layout}`}>
-        <h1>Kitchenette</h1>
+      <main className={`${cantarell.className} ${styles.layout}`}>
+        <h1 className={nunito.className}>Kitchenette</h1>
 
         <section className={styles.search}>
           <label htmlFor="search">What do you want to eat?</label>

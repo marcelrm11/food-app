@@ -7,6 +7,7 @@ import ServingsIcon from '../../assets/icons/servings.png';
 import ClockIcon from '../../assets/icons/clock.png';
 import LikeIcon from '../../assets/icons/heart.png';
 import { diets } from '@/utils/diets';
+import { cantarell, nunito, ubuntu } from '@/utils/fonts';
 
 // function generated with AI
 function toCamelCase(text: string): string {
@@ -56,7 +57,7 @@ export default function Recipe() {
   }, [id]);
 
   return (
-    <article className={styles.article}>
+    <article className={`${styles.article} ${cantarell.className}`}>
       {!info && (
         <Link href="/recipes">
           <button
@@ -79,7 +80,7 @@ export default function Recipe() {
                 Back
               </button>
             </Link>
-            <h2>{info.title}</h2>
+            <h2 className={nunito.className}>{info.title}</h2>
             <picture>
               <img
                 src={info.image}
@@ -143,7 +144,7 @@ export default function Recipe() {
             <hr />
 
             <section className={styles.ingredients}>
-              <h3>Ingredients</h3>
+              <h3 className={ubuntu.className}>Ingredients</h3>
               <ul>
                 {info.extendedIngredients?.map((ing) => (
                   <li key={`${ing.id}-${ing.original}`}>
@@ -163,7 +164,7 @@ export default function Recipe() {
             <section className={styles.instructions}>
               {info.analyzedInstructions.length > 0 && (
                 <>
-                  <h3>Instructions</h3>
+                  <h3 className={ubuntu.className}>Instructions</h3>
                   <ol type="1">
                     {info.analyzedInstructions[0].steps.map((step) => (
                       <li key={step.number}>
@@ -186,7 +187,7 @@ export default function Recipe() {
             <section className={styles.pairings}>
               {info.winePairing?.pairedWines?.length > 0 && (
                 <>
-                  <h3>Pairings</h3>
+                  <h3 className={ubuntu.className}>Pairings</h3>
                   <p>{info.winePairing?.pairingText}</p>
                 </>
               )}

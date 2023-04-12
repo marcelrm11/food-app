@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import styles from '@/styles/RecipeCard.module.css';
+import { ubuntu } from '@/utils/fonts';
 
 interface RecipeCardProps {
   id: number;
@@ -20,7 +21,7 @@ export default function RecipeCard({ id, image, title }: RecipeCardProps) {
         </picture>
       </Link>
       <div>
-        <h4>{title}</h4>
+        <h4 className={ubuntu.className}>{title}</h4>
       </div>
     </section>
   );
