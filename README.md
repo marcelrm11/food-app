@@ -2,6 +2,22 @@
 
 [![CodeFactor](https://www.codefactor.io/repository/github/marcelrm11/food-app/badge)](https://www.codefactor.io/repository/github/marcelrm11/food-app)
 
+## Table of Contents
+
+- [Kitchenette](#kitchenette)
+  - [Table of Contents](#table-of-contents)
+  - [Description](#description)
+  - [Installation](#installation)
+  - [Deploy on Vercel](#deploy-on-vercel)
+  - [Usage](#usage)
+  - [Spoonacular API](#spoonacular-api)
+  - [Views](#views)
+  - [Stack](#stack)
+  - [Next Steps](#next-steps)
+  - [Credits](#credits)
+  - [License](#license)
+  - [Contact info](#contact-info)
+
 ## Description
 
 I have a passion for planning and tracking. I need to cook (almost) every day, and sometimes is difficult to find what to cook. It is also difficult to optimize food waste, and countless times I had to throw away food because it had perished.
@@ -14,22 +30,6 @@ That's where Kitchenette will make me happy. It will:
 - Remind me when something is about to expire.
 - Suggest me recipes to cook based on what I have, what I like and when it will expire.
 - Help me with meal plans that optimize grocery shopping and health.
-
-## Table of Contents
-
-- [Kitchenette](#kitchenette)
-  - [Description](#description)
-  - [Table of Contents](#table-of-contents)
-  - [Installation](#installation)
-  - [Deploy on Vercel](#deploy-on-vercel)
-  - [Usage](#usage)
-  - [Spoonacular API](#spoonacular-api)
-  - [Views](#views)
-  - [Stack](#stack)
-  - [Next Steps](#next-steps)
-  - [Credits](#credits)
-  - [License](#license)
-  - [Contact info](#contact-info)
 
 ## Installation
 
