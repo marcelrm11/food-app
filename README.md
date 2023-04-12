@@ -1,3 +1,5 @@
+[![CodeFactor](https://www.codefactor.io/repository/github/marcelrm11/food-app/badge)](https://www.codefactor.io/repository/github/marcelrm11/food-app)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
