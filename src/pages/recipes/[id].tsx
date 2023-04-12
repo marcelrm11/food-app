@@ -59,7 +59,7 @@ export default function Recipe() {
   return (
     <article className={`${styles.article} ${cantarell.className}`}>
       {!info && (
-        <Link href="/recipes">
+        <Link href="/">
           <button
             type="button"
             className={styles.backButton}
@@ -72,7 +72,7 @@ export default function Recipe() {
       {info && (
         <>
           <section className={styles.header}>
-            <Link href="/recipes">
+            <Link href="/">
               <button
                 type="button"
                 className={styles.backButton}
