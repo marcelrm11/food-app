@@ -25,19 +25,17 @@ That's where Kitchenette will make me happy. It will:
 ## Installation
 
 ```shell
-npm install;
-npm run dev;
-npm run build;
-npm run start;
+npm install
+npm run dev
+npm run build
+npm run start
 ```
 
 ## Usage
 
 This project uses React hooks to manage the display and different API calls.
 
-```md
-    ![usage example from Home component](./src/assets/screenshots/usage_example.png)
-```
+![usage example from Home component](./src/assets/screenshots/usage_example.png)
 
 ## Credits
 
