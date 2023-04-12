@@ -162,7 +162,7 @@ export default function Recipe() {
             </section>
 
             <section className={styles.instructions}>
-              {info.analyzedInstructions.length > 0 && (
+              {info.analyzedInstructions?.length > 0 && (
                 <>
                   <h3 className={ubuntu.className}>Instructions</h3>
                   <ol type="1">
