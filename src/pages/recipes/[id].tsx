@@ -7,7 +7,6 @@ import ServingsIcon from '../../assets/icons/servings.png';
 import ClockIcon from '../../assets/icons/clock.png';
 import LikeIcon from '../../assets/icons/heart.png';
 import { diets } from '@/utils/diets';
-import Image from 'next/image';
 
 // function generated with AI
 function toCamelCase(text: string): string {
@@ -23,12 +22,14 @@ interface DietIconProps {
 const DietIcon = ({ diet }: DietIconProps) => {
   const dietName = toCamelCase(diet);
   return (
-    <Image
-      src={diets[dietName].icon}
-      alt={diets[dietName].name}
-      title={diets[dietName].name}
-      className={styles.icon}
-    />
+    <picture>
+      <img
+        src={diets[dietName].icon}
+        alt={diets[dietName].name}
+        title={diets[dietName].name}
+        className={styles.icon}
+      />
+    </picture>
   );
 };
 
@@ -79,10 +80,12 @@ export default function Recipe() {
               </button>
             </Link>
             <h2>{info.title}</h2>
-            <Image
-              src={info.image}
-              alt={info.title}
-            />
+            <picture>
+              <img
+                src={info.image}
+                alt={info.title}
+              />
+            </picture>
           </section>
 
           <section className={styles.info}>
@@ -101,32 +104,38 @@ export default function Recipe() {
 
               {/* todo: servings useState modify qties */}
               <section className={styles.servings}>
-                <Image
-                  src={ServingsIcon.src}
-                  alt={`Servings: ${info.servings}`}
-                  title="servings"
-                  className={styles.icon}
-                />
+                <picture>
+                  <img
+                    src={ServingsIcon.src}
+                    alt={`Servings: ${info.servings}`}
+                    title="servings"
+                    className={styles.icon}
+                  />
+                </picture>
                 <strong>{info.servings}</strong>
               </section>
 
               <section className={styles.time}>
-                <Image
-                  src={ClockIcon.src}
-                  alt={`Time: ${info.readyInMinutes} minutes`}
-                  title="time"
-                  className={styles.icon}
-                />
+                <picture>
+                  <img
+                    src={ClockIcon.src}
+                    alt={`Time: ${info.readyInMinutes} minutes`}
+                    title="time"
+                    className={styles.icon}
+                  />
+                </picture>
                 <strong>{info.readyInMinutes} minutes</strong>
               </section>
 
               <section className={styles.likes}>
-                <Image
-                  src={LikeIcon.src}
-                  alt={`Time: ${info.aggregateLikes} likes`}
-                  title="likes"
-                  className={styles.icon}
-                />
+                <picture>
+                  <img
+                    src={LikeIcon.src}
+                    alt={`Time: ${info.aggregateLikes} likes`}
+                    title="likes"
+                    className={styles.icon}
+                  />
+                </picture>
                 <strong>{info.aggregateLikes}</strong>
               </section>
             </section>
@@ -138,10 +147,12 @@ export default function Recipe() {
               <ul>
                 {info.extendedIngredients?.map((ing) => (
                   <li key={`${ing.id}-${ing.original}`}>
-                    <Image
-                      src={`https://spoonacular.com/cdn/ingredients_250x250/${ing.image}`}
-                      alt={ing.original}
-                    />
+                    <picture>
+                      <img
+                        src={`https://spoonacular.com/cdn/ingredients_250x250/${ing.image}`}
+                        alt={ing.original}
+                      />
+                    </picture>
                     <span>{ing.nameClean?.toUpperCase()}</span>
                     <small>{`${ing.amount} ${ing.unit}`}</small>
                   </li>
@@ -163,10 +174,12 @@ export default function Recipe() {
                 </>
               )}
               <div>
-                <Image
-                  src={info.image}
-                  alt={info.title}
-                />
+                <picture>
+                  <img
+                    src={info.image}
+                    alt={info.title}
+                  />
+                </picture>
               </div>
             </section>
 

@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
 import styles from '@/styles/RecipeCard.module.css';
-import Image from 'next/image';
 
 interface RecipeCardProps {
   id: number;
@@ -13,10 +12,12 @@ export default function RecipeCard({ id, image, title }: RecipeCardProps) {
   return (
     <section className={styles.card}>
       <Link href={`/recipes/${id}`}>
-        <Image
-          src={image}
-          alt={title}
-        />
+        <picture>
+          <img
+            src={image}
+            alt={title}
+          />
+        </picture>
       </Link>
       <div>
         <h4>{title}</h4>
