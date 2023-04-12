@@ -3,75 +3,10 @@ import { useRouter } from 'next/router';
 import type { ExtendedRecipe } from '@/types';
 import Link from 'next/link';
 import styles from '@/styles/Recipe.module.css';
-import GlutenFreeIcon from '../../assets/icons/gluten-free.png';
-import NoMilkIcon from '../../assets/icons/no-milk.png';
-import KetoIcon from '../../assets/icons/keto.png';
-import NoEggsIcon from '../../assets/icons/no-eggs.png';
-import BreadIcon from '../../assets/icons/bread.png';
-import LeafIcon from '../../assets/icons/leaf.png';
-import VeganIcon from '../../assets/icons/vegan.png';
-import FishIcon from '../../assets/icons/fish.png';
-import PaleoIcon from '../../assets/icons/paleo.png';
-import OliveOilIcon from '../../assets/icons/olive-oil.png';
 import ServingsIcon from '../../assets/icons/servings.png';
 import ClockIcon from '../../assets/icons/clock.png';
 import LikeIcon from '../../assets/icons/heart.png';
-
-interface Diet {
-  name: string;
-  icon: string;
-}
-
-const diets: { [key: string]: Diet } = {
-  glutenFree: {
-    name: 'gluten free',
-    icon: GlutenFreeIcon.src,
-  },
-  dairyFree: {
-    name: 'dairy free',
-    icon: NoMilkIcon.src,
-  },
-  ketogenic: {
-    name: 'ketogenic',
-    icon: KetoIcon.src,
-  },
-  lactoOvoVegetarian: {
-    name: 'lacto ovo vegetarian',
-    icon: LeafIcon.src,
-  },
-  lactoVegetarian: {
-    name: 'lacto vegetarian',
-    icon: NoEggsIcon.src,
-  },
-  ovoVegetarian: {
-    name: 'ovo vegetarian',
-    icon: NoMilkIcon.src,
-  },
-  vegan: {
-    name: 'vegan',
-    icon: VeganIcon.src,
-  },
-  pescetarian: {
-    name: 'pescetarian',
-    icon: FishIcon.src,
-  },
-  paleolithic: {
-    name: 'paleolithic',
-    icon: PaleoIcon.src,
-  },
-  primal: {
-    name: 'primal',
-    icon: PaleoIcon.src,
-  },
-  lowFodMap: {
-    name: 'low fodmap',
-    icon: OliveOilIcon.src,
-  },
-  whole30: {
-    name: 'whole30',
-    icon: BreadIcon.src,
-  },
-};
+import { diets } from '@/utils/diets';
 
 // function generated with AI
 function toCamelCase(text: string): string {
@@ -80,7 +15,11 @@ function toCamelCase(text: string): string {
   });
 }
 
-const dietIcon = (diet: string) => {
+interface DietIconProps {
+  diet: string;
+}
+
+const DietIcon = ({ diet }: DietIconProps) => {
   const dietName = toCamelCase(diet);
   return (
     <img
@@ -100,7 +39,7 @@ export default function Recipe() {
   useEffect(() => {
     const fetchInfo = async () => {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/recipes/${id}/information?apiKey=${process.env.NEXT_PUBLIC_API_KEY}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/recipes/${id}/information?apiKey=${process.env.NEXT_PUBLIC_API_KEY_2}`,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -147,11 +86,13 @@ export default function Recipe() {
 
           <section className={styles.info}>
             <section className={styles.facts}>
-              {info.diets.length > 0 && (
+              {info.diets?.length > 0 && (
                 <section className={styles.diets}>
                   <ul>
                     {info.diets?.map((diet) => (
-                      <li key={diet}>{dietIcon(diet)}</li>
+                      <li key={diet}>
+                        <DietIcon diet={diet} />
+                      </li>
                     ))}
                   </ul>
                 </section>
@@ -200,7 +141,7 @@ export default function Recipe() {
                       src={`https://spoonacular.com/cdn/ingredients_250x250/${ing.image}`}
                       alt={ing.original}
                     />
-                    <span>{ing.nameClean.toUpperCase()}</span>
+                    <span>{ing.nameClean?.toUpperCase()}</span>
                     <small>{`${ing.amount} ${ing.unit}`}</small>
                   </li>
                 ))}
@@ -215,9 +156,6 @@ export default function Recipe() {
                     {info.analyzedInstructions[0].steps.map((step) => (
                       <li key={step.number}>
                         <p>{step.step}</p>
-                        {/* <img
-                      src={`https://spoonacular.com/cdn/equipment_250x250/${step.equipment[0]?.image}`}
-                    /> */}
                       </li>
                     ))}
                   </ol>
