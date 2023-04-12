@@ -7,6 +7,7 @@ import ServingsIcon from '../../assets/icons/servings.png';
 import ClockIcon from '../../assets/icons/clock.png';
 import LikeIcon from '../../assets/icons/heart.png';
 import { diets } from '@/utils/diets';
+import Image from 'next/image';
 
 // function generated with AI
 function toCamelCase(text: string): string {
@@ -22,7 +23,7 @@ interface DietIconProps {
 const DietIcon = ({ diet }: DietIconProps) => {
   const dietName = toCamelCase(diet);
   return (
-    <img
+    <Image
       src={diets[dietName].icon}
       alt={diets[dietName].name}
       title={diets[dietName].name}
@@ -78,7 +79,7 @@ export default function Recipe() {
               </button>
             </Link>
             <h2>{info.title}</h2>
-            <img
+            <Image
               src={info.image}
               alt={info.title}
             />
@@ -100,7 +101,7 @@ export default function Recipe() {
 
               {/* todo: servings useState modify qties */}
               <section className={styles.servings}>
-                <img
+                <Image
                   src={ServingsIcon.src}
                   alt={`Servings: ${info.servings}`}
                   title="servings"
@@ -110,7 +111,7 @@ export default function Recipe() {
               </section>
 
               <section className={styles.time}>
-                <img
+                <Image
                   src={ClockIcon.src}
                   alt={`Time: ${info.readyInMinutes} minutes`}
                   title="time"
@@ -120,7 +121,7 @@ export default function Recipe() {
               </section>
 
               <section className={styles.likes}>
-                <img
+                <Image
                   src={LikeIcon.src}
                   alt={`Time: ${info.aggregateLikes} likes`}
                   title="likes"
@@ -137,7 +138,7 @@ export default function Recipe() {
               <ul>
                 {info.extendedIngredients?.map((ing) => (
                   <li key={`${ing.id}-${ing.original}`}>
-                    <img
+                    <Image
                       src={`https://spoonacular.com/cdn/ingredients_250x250/${ing.image}`}
                       alt={ing.original}
                     />
@@ -162,7 +163,7 @@ export default function Recipe() {
                 </>
               )}
               <div>
-                <img
+                <Image
                   src={info.image}
                   alt={info.title}
                 />

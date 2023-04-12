@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Head from 'next/head';
 import { Inter } from 'next/font/google';
 import styles from '@/styles/recipes.module.css';
@@ -28,13 +28,6 @@ export default function Home({ initialRecipes }: { initialRecipes: Recipe[] }) {
   const [search, setSearch] = useLocalStorage<string>('search', '');
   const [cuisines, setCuisines] = useLocalStorage<string[]>('cuisines', []);
   const debouncedSearch = useDebounce(search, 500);
-
-  // const setRecipesCallback = useCallback(
-  //   (recipes: Recipe[]) => {
-  //     setRecipes(recipes);
-  //   },
-  //   [setRecipes]
-  // );
 
   useEffect(() => {
     const fetchRecipes = async () => {
@@ -77,7 +70,7 @@ export default function Home({ initialRecipes }: { initialRecipes: Recipe[] }) {
   return (
     <>
       <Head>
-        <title>My Food App</title>
+        <title>Kitchenette</title>
         <meta
           name="description"
           content="Find recipes with the ingredients you have at home. Track what is about to expire and what you need to buy."
@@ -89,7 +82,7 @@ export default function Home({ initialRecipes }: { initialRecipes: Recipe[] }) {
       </Head>
 
       <main className={`${inter.className} ${styles.layout}`}>
-        <h1>My Food App</h1>
+        <h1>Kitchenette</h1>
 
         <section className={styles.search}>
           <label htmlFor="search">What do you want to eat?</label>
