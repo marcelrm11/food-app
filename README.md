@@ -55,6 +55,8 @@ This project uses React hooks to manage the display and different API calls. As 
 - useEffect for the API calls, with corresponding dependencies.
 - useMemo to avoid unnecessary re-renderings and API calls.
 
+![usage example from Home component](./src/assets/screenshots/usage_example.png)
+
 ## Spoonacular API
 
 The [Spoonacular API](https://spoonacular.com/food-api/) has a great amount of endpoints, to use with multiple query params. This gives you an endless amount of possible queries and data usages.
