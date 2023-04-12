@@ -125,8 +125,14 @@
     inset -6px -6px 10px 0 rgba(255, 255, 255, 0.5);
 }
 
+.ingredients li picture {
+  max-height: 145px;
+  max-width: 86px;
+  justify-content: center;
+}
 .ingredients li img {
   max-width: 100%;
+  max-height: 144px;
   mix-blend-mode: multiply; /* remove white background from images */
   place-self: center;
 }

@@ -9,4 +9,5 @@ body {
 
 body picture {
   display: flex;
+  max-height: 100%;
 }
