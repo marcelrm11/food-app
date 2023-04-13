@@ -39,10 +39,11 @@ export default function Recipe() {
   const { id } = router.query;
   const [info, setInfo] = useState<ExtendedRecipe | null>(null);
 
+  // fetch recipe info from API
   useEffect(() => {
     const fetchInfo = async () => {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/recipes/${id}/information?apiKey=${process.env.NEXT_PUBLIC_API_KEY_2}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/recipes/${id}/information?apiKey=${process.env.NEXT_PUBLIC_API_KEY}`,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -58,6 +59,7 @@ export default function Recipe() {
 
   return (
     <article className={`${styles.article} ${cantarell.className}`}>
+      {/* back button when loading fails */}
       {!info && (
         <Link href="/">
           <button
@@ -71,6 +73,7 @@ export default function Recipe() {
 
       {info && (
         <>
+          {/* header with back button, picture and title */}
           <section className={styles.header}>
             <Link href="/">
               <button
@@ -80,7 +83,7 @@ export default function Recipe() {
                 Back
               </button>
             </Link>
-            <h2 className={nunito.className}>{info.title}</h2>
+            <h1 className={nunito.className}>{info.title}</h1>
             <picture>
               <img
                 src={info.image}
@@ -89,6 +92,7 @@ export default function Recipe() {
             </picture>
           </section>
 
+          {/* special diets info */}
           <section className={styles.info}>
             <section className={styles.facts}>
               {info.diets?.length > 0 && (
@@ -103,7 +107,7 @@ export default function Recipe() {
                 </section>
               )}
 
-              {/* todo: servings useState modify qties */}
+              {/* servings info */}
               <section className={styles.servings}>
                 <picture>
                   <img
@@ -116,6 +120,7 @@ export default function Recipe() {
                 <strong>{info.servings}</strong>
               </section>
 
+              {/* preparation time info */}
               <section className={styles.time}>
                 <picture>
                   <img
@@ -128,6 +133,7 @@ export default function Recipe() {
                 <strong>{info.readyInMinutes} minutes</strong>
               </section>
 
+              {/* number of likes */}
               <section className={styles.likes}>
                 <picture>
                   <img
@@ -143,8 +149,9 @@ export default function Recipe() {
 
             <hr />
 
+            {/* ingredients info */}
             <section className={styles.ingredients}>
-              <h3 className={ubuntu.className}>Ingredients</h3>
+              <h2 className={ubuntu.className}>Ingredients</h2>
               <ul>
                 {info.extendedIngredients?.map((ing) => (
                   <li key={`${ing.id}-${ing.original}`}>
@@ -161,10 +168,11 @@ export default function Recipe() {
               </ul>
             </section>
 
+            {/* instructions info */}
             <section className={styles.instructions}>
               {info.analyzedInstructions?.length > 0 && (
                 <>
-                  <h3 className={ubuntu.className}>Instructions</h3>
+                  <h2 className={ubuntu.className}>Instructions</h2>
                   <ol type="1">
                     {info.analyzedInstructions[0].steps.map((step) => (
                       <li key={step.number}>
@@ -184,10 +192,11 @@ export default function Recipe() {
               </div>
             </section>
 
+            {/* wine pairings info */}
             <section className={styles.pairings}>
               {info.winePairing?.pairedWines?.length > 0 && (
                 <>
-                  <h3 className={ubuntu.className}>Pairings</h3>
+                  <h2 className={ubuntu.className}>Pairings</h2>
                   <p>{info.winePairing?.pairingText}</p>
                 </>
               )}

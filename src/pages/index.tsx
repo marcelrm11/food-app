@@ -22,17 +22,19 @@ async function getServerSideProps() {
 }
 
 export default function Home({ initialRecipes }: { initialRecipes: Recipe[] }) {
+  // cannot use useLocalStorage in recipes due to hydration problem with next.js (SSR vs CSR)
   const [recipes, setRecipes] = useState<Recipe[]>(initialRecipes);
   const [search, setSearch] = useLocalStorage<string>('search', '');
   const [cuisines, setCuisines] = useLocalStorage<string[]>('cuisines', []);
   const debouncedSearch = useDebounce(search, 500);
 
+  // fetch recipes from API when search input or cuisines change
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/recipes/complexSearch?apiKey=${
-            process.env.NEXT_PUBLIC_API_KEY_2
+            process.env.NEXT_PUBLIC_API_KEY
           }&query=${debouncedSearch}&cuisine=${cuisines.join(
             ','
           )}&number=50&sort=popularity&sortDirection=desc`,
@@ -52,8 +54,10 @@ export default function Home({ initialRecipes }: { initialRecipes: Recipe[] }) {
     fetchRecipes();
   }, [cuisines, debouncedSearch]);
 
+  // avoid unnecessary API calls if no search input or cuisines change
   const memoizedRecipes = useMemo(() => recipes, [recipes]);
 
+  // update cuisines when user checks or unchecks a checkbox
   const handleCuisineChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
     if (checked) {
@@ -82,6 +86,7 @@ export default function Home({ initialRecipes }: { initialRecipes: Recipe[] }) {
       <main className={`${cantarell.className} ${styles.layout}`}>
         <h1 className={nunito.className}>Kitchenette</h1>
 
+        {/* search input field */}
         <section className={styles.search}>
           <label htmlFor="search">What do you want to eat?</label>
           <input
@@ -92,6 +97,7 @@ export default function Home({ initialRecipes }: { initialRecipes: Recipe[] }) {
           />
         </section>
 
+        {/* cuisines checkboxes selector */}
         <section className={styles.cuisines}>
           <fieldset>
             <legend>Cuisine:</legend>
@@ -111,6 +117,7 @@ export default function Home({ initialRecipes }: { initialRecipes: Recipe[] }) {
           </fieldset>
         </section>
 
+        {/* recipes grid populated from API */}
         <article className={styles.grid}>
           {memoizedRecipes?.length > 0 ? (
             memoizedRecipes.map((recipe) => (
