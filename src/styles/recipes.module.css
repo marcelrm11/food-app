@@ -11,6 +11,15 @@
   padding-bottom: 5rem;
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+.header .aichef {
+  margin-top: 2.25rem;
+  cursor: pointer;
+}
+
 .search,
 .cuisines {
   margin-bottom: 1rem;

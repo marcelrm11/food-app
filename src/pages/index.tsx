@@ -7,6 +7,7 @@ import useLocalStorage from '@/hooks/useLocalStorage';
 import useDebounce from '@/hooks/useDebounce';
 import { allCuisines } from '@/utils/cuisines';
 import { cantarell, nunito } from '@/utils/fonts';
+import Link from 'next/link';
 
 async function getServerSideProps() {
   const response = await fetch(
@@ -84,7 +85,12 @@ export default function Home({ initialRecipes }: { initialRecipes: Recipe[] }) {
       </Head>
 
       <main className={`${cantarell.className} ${styles.layout}`}>
-        <h1 className={nunito.className}>Kitchenette</h1>
+        <header className={styles.header}>
+          <h1 className={nunito.className}>Kitchenette</h1>
+          <Link href="/aichef">
+            <button className={styles.aichef}>AiChef</button>
+          </Link>
+        </header>
 
         {/* search input field */}
         <section className={styles.search}>
