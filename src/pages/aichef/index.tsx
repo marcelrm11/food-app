@@ -3,7 +3,8 @@ import styles from '@/styles/Aichef.module.css';
 
 // create a react ts component with an input for the user to write ingredients, a button to ask for a recipe name and a space to display 3 possible recipes
 export default function Aichef() {
-  const [recipes, setRecipes] = React.useState([]);
+  // ! type any
+  const [recipes, setRecipes] = React.useState<any>([]);
 
   return (
     <div className={styles.layout}>
